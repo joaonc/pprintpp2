@@ -5,6 +5,8 @@ This is a continuation of `pprintpp <https://github.com/wolever/pprintpp>`_,
 by `David Wolever <https://github.com/wolever>`_, which seems to have been
 discontinued by the original writer. Currently, under development still.
 
+Python 3.7 and above.
+
 Installation
 ------------
 
