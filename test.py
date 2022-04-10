@@ -47,7 +47,7 @@ slashed = lambda s: u"'%s'" %(
 
 @pytest.mark.skip('fix')
 @pytest.mark.parametrize("input,expected,encoding", [
-    (uni_safe, "%s'%s'" %('', uni_safe), "utf-8"),
+    (uni_safe, "'%s'" % uni_safe, "utf-8"),
     (uni_unsafe, slashed(uni_unsafe), "utf-8"),
     (uni_unsafe, slashed(uni_unsafe), "ascii"),
     ("\U0002F9B2", slashed("\U0002F9B2"), "ascii")
