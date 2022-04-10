@@ -1,15 +1,15 @@
 ``pprint++``: a drop-in replacement for ``pprint`` that's actually pretty
 =========================================================================
 
-This is a continuation of [pprintpp](https://github.com/wolever/pprintpp), by [David Wolever](https://github.com/wolever),
-which seems to have been discontinued by the original writer. Currently, under development still.
+This is a continuation of `pprintpp <https://github.com/wolever/pprintpp>`_,
+by `David Wolever <https://github.com/wolever>`_, which seems to have been
+discontinued by the original writer. Currently, under development still.
 
 Installation
 ------------
 
 
-``pprint++`` can be installed with Python 2 or Python 3 using ``pip`` or
-``easy_install``::
+``pprint++`` can be installed using ``pip`` or ``easy_install``::
 
     $ pip install pprintpp
     - OR -
