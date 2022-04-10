@@ -14,7 +14,7 @@ __all__ = [
 
 
 #
-# Py2/Py3 compatibility stuff
+# Py2/Py3 compatibility stuff  # TODO: PY3
 #
 
 try:
@@ -22,37 +22,21 @@ try:
     _test_has_collections = True
 except ImportError:
     # Python 2.6 doesn't have collections
-    class dummy_class(object):
+    class dummy_class(object):  # TODO: PY3
         __repr__ = object()
     OrderedDict = defaultdict = Counter = dummy_class
     _test_has_collections = False
 
 
-PY3 = sys.version_info >= (3, 0, 0)
-BytesType = bytes
-TextType = str if PY3 else unicode
-u_prefix = '' if PY3 else 'u'
+BytesType = bytes  # TODO: PY3
+TextType = str  # TODO: PY3
+u_prefix = ''  # TODO: PY3
 
 
-if PY3:
-    # Import builins explicitly to keep Py2 static analyzers happy
-    import builtins
-    chr_to_ascii = lambda x: builtins.ascii(x)[1:-1]
-    unichr = chr
-    from .safesort import safesort
-    _iteritems = lambda x: x.items()
-else:
-    chr_to_ascii = lambda x: repr(x)[2:-1]
-    safesort = sorted
-    _iteritems = lambda x: x.iteritems()
-
-
-def _sorted_py2(iterable):
-    with warnings.catch_warnings():
-        if getattr(sys, "py3kwarning", False):
-            warnings.filterwarnings("ignore", "comparing unequal types "
-                                    "not supported", DeprecationWarning)
-        return sorted(iterable)
+chr_to_ascii = lambda x: ascii(x)[1:-1]
+unichr = chr
+from .safesort import safesort
+_iteritems = lambda x: x.items()
 
 def _sorted_py3(iterable):
     try:
@@ -60,17 +44,8 @@ def _sorted_py3(iterable):
     except TypeError:
         return safesort(iterable)
 
-_sorted = PY3 and _sorted_py3 or _sorted_py3
-
-if hasattr(TextType, 'isascii'):  # Python>=3.7
-    _isascii = TextType.isascii
-else:
-    def _isascii(text):
-        try:
-            text.encode('ascii')
-        except UnicodeEncodeError:
-            return False
-        return True
+_sorted = _sorted_py3  # TODO: PY3
+_isascii = TextType.isascii  # TODO: PY3
 
 #
 # End compatibility stuff
