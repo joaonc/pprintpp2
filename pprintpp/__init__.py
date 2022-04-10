@@ -12,26 +12,11 @@ __all__ = [
     "PrettyPrinter",
 ]
 
-
-#
-# Py2/Py3 compatibility stuff  # TODO: PY3
-#
-
-try:
-    from collections import OrderedDict, defaultdict, Counter
-    _test_has_collections = True
-except ImportError:
-    # Python 2.6 doesn't have collections
-    class dummy_class(object):  # TODO: PY3
-        __repr__ = object()
-    OrderedDict = defaultdict = Counter = dummy_class
-    _test_has_collections = False
+from collections import OrderedDict, defaultdict, Counter
+from .safesort import safesort
 
 
 chr_to_ascii = lambda x: ascii(x)[1:-1]
-unichr = chr
-from .safesort import safesort
-_iteritems = lambda x: x.items()  # TODO: PY3
 
 def _sorted(iterable):
     try:
@@ -39,9 +24,6 @@ def _sorted(iterable):
     except TypeError:
         return safesort(iterable)
 
-#
-# End compatibility stuff
-#
 
 class TextIO(io.TextIOWrapper):
     def __init__(self, encoding=None):
@@ -102,7 +84,7 @@ unicode_printable_categories = {
 }
 
 ascii_table = dict(
-    (unichr(i), chr_to_ascii(unichr(i)))
+    (chr(i), chr_to_ascii(chr(i)))
     for i in range(255)
 )
 
@@ -353,7 +335,7 @@ class PrettyPrinter(object):
                 state.write(": ")
                 self._format(v, state)
         elif typeish == "odict":
-            for k, v in _iteritems(object):
+            for k, v in object.items():
                 if first:
                     first = False
                 else:
