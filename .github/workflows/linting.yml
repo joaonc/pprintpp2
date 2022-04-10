@@ -21,5 +21,7 @@ jobs:
         run: black .
       - name: flake8
         run: flake8 .
+      - name: bandit
+        run: bandit .
       - name: safety
         run: safety check

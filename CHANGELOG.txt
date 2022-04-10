@@ -6,6 +6,7 @@
     * Use GitHub Actions instead of Travis.
     * Linting: `isort`, `black`, `flake8`.
       Wrapping at 100 lines from the previous 80.
+    * Security: `safety` and `bandit`.
     * Other file and folder restructuring.
 
 0.4.0
