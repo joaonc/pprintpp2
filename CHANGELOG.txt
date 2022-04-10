@@ -4,7 +4,8 @@
     * Add `sort_dict` option (thanks @gergelyk).
     * Use `pytest` instead of `nose` (thanks @pgajdos).
     * Use GitHub Actions instead of Travis.
-    * Linting.
+    * Linting (isort, black, etc.).
+      Wrapping at 100 lines from the previous 80.
     * Other file and folder restructuring.
 
 0.4.0

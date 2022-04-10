@@ -1,0 +1,26 @@
+[tool.bandit]
+
+[tool.black]
+extend-exclude = 'app/ui/forms'
+line-length = 100
+target-version = ['py37']
+skip-string-normalization = true
+
+[tool.isort]
+known_first_party = 'pprintpp'
+profile = 'black'
+sections = 'FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER'
+
+[tool.pytest.ini_options]
+# Markers: See documentation on what markers represent.
+markers = ['windows']
+testpaths = ['tests']
+
+[tool.mypy]
+python_version = '3.7'
+warn_return_any = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = ['invoke', 'pytest_check']
+ignore_missing_imports = true
