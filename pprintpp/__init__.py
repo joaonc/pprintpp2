@@ -28,24 +28,16 @@ except ImportError:
     _test_has_collections = False
 
 
-BytesType = bytes  # TODO: PY3
-TextType = str  # TODO: PY3
-u_prefix = ''  # TODO: PY3
-
-
 chr_to_ascii = lambda x: ascii(x)[1:-1]
 unichr = chr
 from .safesort import safesort
-_iteritems = lambda x: x.items()
+_iteritems = lambda x: x.items()  # TODO: PY3
 
-def _sorted_py3(iterable):
+def _sorted(iterable):
     try:
         return sorted(iterable)
     except TypeError:
         return safesort(iterable)
-
-_sorted = _sorted_py3  # TODO: PY3
-_isascii = TextType.isascii  # TODO: PY3
 
 #
 # End compatibility stuff
@@ -215,7 +207,7 @@ class PPrintState(object):
             if self.write_constrain < 0:
                 raise self.WriteConstrained
 
-        if isinstance(data, BytesType):
+        if isinstance(data, bytes):
             data = data.decode("latin1")
         self.stream.write(data)
         nl_idx = data.rfind("\n")
@@ -438,12 +430,12 @@ class PrettyPrinter(object):
             write(closer)
             return
 
-        if r == BytesType.__repr__:
+        if r == bytes.__repr__:
             write(repr(object))
             return
 
-        if r == TextType.__repr__:
-            if _isascii(object):  # Optimalization
+        if r == str.__repr__:
+            if str.isascii(object):  # Optimalization
                 write(repr(object))
                 return
             if "'" in object and '"' not in object:
@@ -455,7 +447,7 @@ class PrettyPrinter(object):
             qget = quotes.get
             ascii_table_get = ascii_table.get
             unicat_get = unicodedata.category
-            write(u_prefix + quote)
+            write(quote)
             for char in object:
                 if ord(char) > 0x7F:
                     cat = unicat_get(char)
