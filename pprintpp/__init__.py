@@ -381,7 +381,7 @@ class PrettyPrinter(object):
 
         typ = type(object)
         r = typ.__repr__
-        # Note: see comments on _mk_open_close_empty_dict for the rational
+        # Note: see comments on _mk_open_close_empty_dict for the rationale
         # behind looking up based first on type then on __repr__.
         try:
             opener_closer_empty = self._open_close_empty.get(typ) or self._open_close_empty.get(r)
@@ -520,20 +520,20 @@ if __name__ == "__main__":
                 # np.array([[1,2],[3,4]]),
                 "world",
             ],
-            u"u": ["a", u"\u1234", "b"],
+            "u": ["a", "\u1234", "b"],
             "recursive": recursive,
             "z": {
                 "very very very long key stuff 1234": {
                     "much value": "very nest! " * 10,
-                    u"unicode": u"4U!'\"",
+                    "unicode": "4U!'\"",
                 },
                 "aldksfj alskfj askfjas fkjasdlkf jasdlkf ajslfjas": ["asdf"] * 10,
             },
         }
     )
-    pprint(u"\xe9e\u0301")
-    uni_safe = u"\xe9 \u6f02 \u0e4f \u2661"
-    uni_unsafe = u"\u200a \u0301 \n"
+    pprint("\xe9e\u0301")
+    uni_safe = "\xe9 \u6f02 \u0e4f \u2661"
+    uni_unsafe = "\u200a \u0301 \n"
     unistr = uni_safe + " --- " + uni_unsafe
     sys.modules.pop("locale", None)
     pprint(unistr)
