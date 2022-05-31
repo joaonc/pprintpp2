@@ -44,11 +44,11 @@ Usage
     In [1]: %load_ext pprintpp
    
    This will use pprintpp for ipython's output.
-   
+
    To load this extension when ipython starts, put the previous line in your `startup file <https://ipython.org/ipython-doc/1/config/overview.html#startup-files>`_.
-   
+
    You can change the indentation level like so::
-    
+
     In [2]: %config PPrintPP.indentation = 4 
 
 4. To monkeypatch ``pprint``::

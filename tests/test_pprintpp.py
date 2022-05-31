@@ -2,11 +2,12 @@ from __future__ import print_function
 
 import io
 import sys
+from collections import defaultdict
 from contextlib import redirect_stdout
 
 import pytest
+
 import pprintpp as p
-from pprintpp import defaultdict
 
 sys.path.append("pp/")
 import pp  # noqa: E402 module level import not at top of file
