@@ -14,7 +14,7 @@ def memoized_property(f):
 
 def _build_safe_cmp_func(name, cmp, prefix=""):
     code = textwrap.dedent(
-        """\
+        f"""\
         def {name}(self, other):
             try:
                 return {prefix}(self.obj {cmp} other.obj)
@@ -26,7 +26,7 @@ def _build_safe_cmp_func(name, cmp, prefix=""):
                 pass
             return {prefix}(self.verysafeobj {cmp} other.verysafeobj)
     """
-    ).format(name=name, cmp=cmp, prefix=prefix)
+    )
     gs = ls = {}
     exec(code, gs, ls)
     return gs[name]
